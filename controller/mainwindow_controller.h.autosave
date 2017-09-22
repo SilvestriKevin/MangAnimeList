@@ -1,0 +1,39 @@
+#ifndef MAINWINDOW_CONTROLLER
+#define MAINWINDOW_CONTROLLER
+
+#include "../model/item_database.h"
+#include "../model/user_database.h"
+#include <QObject>
+#include "../view/loginwindow.h"
+#include "../view/mainwindow.h"
+#include "user_controller.h"
+#include "item_controller.h"
+#include <QMessageBox>
+
+class mainwindowController:public QObject{
+private:
+    Q_OBJECT
+    ItemDatabase* allItems;
+    UserDatabase* allUsers;
+    User* logged_user;
+
+    LoginWindow* login;
+    MainWindow* mainwindow;
+
+    user_Controller* userController;
+    item_Controller* itemController;
+
+public:
+    mainwindowController(QObject *parent =0);
+    ~mainwindowController();
+    void Login();
+
+public slots:
+     void doLoginController(const QString &, const QString &);
+     void updateLogin();
+     void updateUserController(UserSettings*);
+     void updateItemController(ItemSettings*);
+
+};
+
+#endif // MAINWINDOW_CONTROLLER
